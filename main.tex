@@ -1,0 +1,287 @@
+\documentclass[12pt]{report}
+\usepackage{graphicx}
+\usepackage{fontspec}
+\usepackage[utf8]{inputenc}
+\usepackage[acronym, nonumberlist, section, nogroupskip]{glossaries}
+\usepackage[english]{babel}
+\usepackage{indentfirst}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage{titletoc}
+\usepackage{etoolbox}
+\usepackage{geometry}
+\usepackage{etoolbox} % for removing lof, lot grouping
+\usepackage[
+    backend=biber,
+    style=ieee,
+  ]{biblatex}
+\usepackage{setspace}
+\usepackage{blindtext}  % for dummy text
+
+%================ SETUP: PATHS
+\graphicspath{ {./images/} }
+\addbibresource{./references/biblography.bib}
+
+
+%================ SETUP: LIST OF ACRONYMS
+\makeglossaries
+\setglossarystyle{list}
+
+\newacronym{bit}{BIT}{Bachelor of Information Technology}
+\newacronym{ucsc}{UCSC}{University of Colombo School of Computing}
+\newacronym{grn}{GRN}{Goods Received Note}
+\newacronym{sdlc}{SDLC}{Software Development Life Cycle}
+\newacronym{mvc}{MVC}{Model View Controller}
+\newacronym{uml}{UML}{Unified Modeling Language}
+\newacronym{erd}{ERD}{Entity Relationship Diagram}
+\newacronym{ui}{UI}{User Interface}
+\newacronym{gui}{GUI}{Graphical User Interface}
+
+
+%================ SETUP: FORMAT CHAPTER NAMES IN THE DOCUMENT BODY (PAGES)
+\titleformat{\chapter}[hang] 
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter:}{5pt}{} 
+\titlespacing*{\chapter}{0pt}{-30pt}{10pt}
+
+
+% ================ SETUP: TABLE OF CONTENTS
+% space before and after toc title
+\setlength{\cftbeforetoctitleskip}{3pt}
+\setlength{\cftaftertoctitleskip}{10pt}
+
+% format chapter titles for ucsc modal
+\titlecontents{chapter}
+   [0pt]% <left>
+   {\addvspace{10pt}}% {above}
+%    {\bfseries}% <above-code>
+   {\bf\chaptername\ \thecontentslabel:\quad}% <numbered-entry-format>
+   {}% <numberless-entry-format>
+   {\titlerule*[0.8pc]{.}\contentspage}
+
+% set space above section, subsection & subsubsection titles
+\setlength{\cftbeforesecskip}{10pt}
+\setlength{\cftbeforesubsecskip}{10pt}
+\setlength{\cftbeforesubsubsecskip}{10pt}
+
+% dotted lines for chapters titles
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+% enable subsubsections
+\setcounter{tocdepth}{4}
+
+
+% ================ SETUP: LIST OF FIGURES
+% space before and after lof title
+\setlength{\cftbeforeloftitleskip}{3pt}
+\setlength{\cftafterloftitleskip}{10pt}
+
+% space before each entry
+\setlength{\cftbeforefigskip}{10pt}
+
+% left indent
+\setlength{\cftfigindent}{0pt}
+
+% disable grouping entries based on chapters
+\makeatletter
+\patchcmd{\@chapter}{\addtocontents{lof}{\protect\addvspace{10\p@}}}{}{}{}
+\makeatother
+
+
+% ================ SETUP: LIST OF TABLES
+% space before and after lof title
+\setlength{\cftbeforelottitleskip}{3pt}
+\setlength{\cftafterlottitleskip}{10pt}
+
+% space before each entry
+\setlength{\cftbeforetabskip}{10pt}
+
+% left indent
+\setlength{\cfttabindent}{0pt}
+
+% disable grouping entries based on chapters
+\makeatletter
+\patchcmd{\@chapter}{\addtocontents{lot}{\protect\addvspace{10\p@}}}{}{}{}
+\makeatother
+
+
+%================ SETUP: FONTS
+\setmainfont[
+	Path = ./fonts/,
+ 	BoldFont={LiberationSerif-Bold.ttf}, 
+ 	ItalicFont={LiberationSerif-Italic.ttf},
+ 	BoldItalicFont={LiberationSerif-BoldItalic.ttf}
+ ]{LiberationSerif-Regular.ttf}
+ 
+
+%=============== SETUP: MARGIN AND PAGE SETUP
+\geometry{a4paper, left=37mm,  top=25mm, bottom=25mm, right=25mm}
+% \usepackage[document]{ragged2e} % left-alignment
+% \hyphenpenalty=10000
+% \tolerance=10000
+
+
+%=============== START OF THE DOCUMENT
+\begin{document}
+\onehalfspacing
+
+
+%=============== SETUP: PARAGRAPH STYLES
+\setlength{\parindent}{3em} % start indentation
+\setlength{\parskip}{1em} % vertical space between two paragraphs
+
+
+%========= PAGE: TITLE PAGE (COVER)
+\thispagestyle{empty}
+\begin{titlepage}
+	\begin{center}
+		\vspace*{2cm}
+		\includegraphics[width=0.15\textwidth]{uoc/uoc_logo.jpg}\\
+		\vspace{1cm}
+		{\LARGE YOUR BIT FINAL PROJECT TITLE\\ IS HERE}
+		\vspace{2cm}
+		\begin{large}
+
+			\textbf{YOUR NAME}\\
+			\vspace{2cm}
+			BIT Registration Number: YOUR REG NUMBER \\
+			Index Number: YOUR INDEX NUMBER \\
+			Name of the Client :  YOUR CLIENT NAME \\
+			Name of the supervisor : YOUR SUPERVISOR'S NAME \\
+
+			\vspace{1cm}
+
+			\bf{YEAR/ MONTH(ex: September)}
+
+			\vspace{2.5cm}
+
+			\vfill
+
+
+			\includegraphics[width=0.15\textwidth]{uoc/ucsc_logo.png}%
+			\begin{minipage}[b]{0.7\textwidth}
+				\centering
+				{\small \bf Degree of \acrlong{bit} of the \acrlong{ucsc}}
+			\end{minipage}%
+			\includegraphics[width=0.15\textwidth]{uoc/bit_logo.png}
+		\end{large}
+	\end{center}
+\end{titlepage}
+
+
+%========= PAGE: ABSTRACT
+\newpage
+\thispagestyle{plain}
+\pagenumbering{roman}
+\setcounter{page}{2}
+\chapter*{\Huge Abstract}
+\addcontentsline{toc}{chapter}{\bf{Abstract}}
+
+\blindtext
+
+%========== PAGE: TABLE OF CONTENT
+\newpage
+\addcontentsline{toc}{chapter}{\bf{Contents}}
+\begin{singlespacing}
+	\tableofcontents
+\end{singlespacing}
+\setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{2.0}
+
+
+%========== PAGE: LIST OF FIGURES
+\newpage
+\addcontentsline{toc}{chapter}{\bf{List of Figures}}
+\begin{singlespacing}
+	\listoffigures
+\end{singlespacing}
+% \setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{2.0}
+
+
+%========== PAGE: LIST OF TABLES
+\newpage
+\addcontentsline{toc}{chapter}{\bf{List of Tables}}
+\begin{singlespacing}
+	\listoftables
+\end{singlespacing}
+% \setlength{\parskip}{1em}
+\renewcommand{\baselinestretch}{2.0}
+
+
+%========== PAGE: LIST OF ACRONYMS
+% \section*{\Huge List of Acronyms}
+% \addcontentsline{toc}{chapter}{\bf{List of Acronyms}}
+\newpage
+\addcontentsline{toc}{chapter}{\bf{List of Acronyms}}
+\printglossary[type=\acronymtype,title=\Huge{List of Acronyms}]
+
+% \setlength{\parskip}{1em}
+% \renewcommand{\baselinestretch}{2.0}
+
+
+%================ SETUP: SECTION TITLE FONT SIZES
+\titleformat*{\section}{\fontsize{16}{19}\bfseries\normalfont}
+\titleformat*{\subsection}{\fontsize{14}{17}\bfseries\normalfont}
+\titleformat*{\subsubsection}{\fontsize{12}{15}\bfseries\normalfont}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+% Main body of Dissertation
+%========= Start of Dissertation 
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{secnumdepth}{3} % enable subsubsection numbering
+\onehalfspacing
+
+\chapter{Introduction}
+\blindtext
+
+\section{Motivation for the project}
+\blindtext
+
+\begin{itemize}
+	\item a
+	\item b
+\end{itemize}
+
+\blindtext
+
+\section{Objectives}
+
+\blindtext
+
+\begin{itemize}
+	\item a
+	\item b
+\end{itemize}
+
+\section{Scope}
+\blindtext
+
+\newpage
+\chapter{Analysis}
+
+\blindtext
+
+Sample reference \cite{sommerville_2008_software}.
+
+\section{Review of similar systems}
+\blindtext
+
+\subsection{Similar System}
+\blindtext
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{sample.png}
+	\caption{Sample figure 1}
+\end{figure}
+
+%>>>>>>>>>>>>>>>>>>>>> End of Dissertation 
+
+%-------- Bibliography
+%\newpage
+\singlespacing
+\printbibliography[title={References}]
+\end{document}
