@@ -28,6 +28,10 @@ Then, you can run the script by typing:
 ```
 This will generate a PDF file named ``main.pdf``.
 
+### Examples
+Here are some examples of reports and dissertations that have been written using this template:
+- [TEF Report](https://github.com/ipmanlk/TEF-Report): Final Report for Two Elephants Fireworks Project 
+
 ### Contributing
 If you find any issues with the template or would like to suggest improvements, 
 please feel free to open an issue or submit a pull request.
